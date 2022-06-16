@@ -41,5 +41,10 @@ export default function Catalogue() {
         });
     };
 
-    return <div></div>;
+    return (
+        <div>
+            <Pagination current={pagination.current_page} total={pagination.total_pages} onChange={changePage} />
+            {item?.title && <Page item={item} />}
+        </div>
+    );
 }
