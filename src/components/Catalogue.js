@@ -1,4 +1,4 @@
-import { Pagination } from 'antd';
+import { Pagination, Space } from 'antd';
 import 'antd/dist/antd.css';
 import React, { useEffect, useState } from 'react';
 import { getRequest } from '../library/middleware';
@@ -10,7 +10,7 @@ export default function Catalogue() {
 
     useEffect(() => {
         getRequest({
-            endpoint: '/v1/products',
+            endpoint: 'api/v1/products',
             params: {
                 limit: 1,
             },
@@ -26,7 +26,7 @@ export default function Catalogue() {
 
     const changePage = (page) => {
         getRequest({
-            endpoint: '/v1/products',
+            endpoint: 'api/v1/products',
             params: {
                 limit: 1,
                 page: page,
@@ -42,9 +42,20 @@ export default function Catalogue() {
     };
 
     return (
-        <div>
-            <Pagination current={pagination.current_page} total={pagination.total_pages} onChange={changePage} />
-            {item?.title && <Page item={item} />}
+        <div className='catalogue'>
+            <Space direction='vertical' align='center' style={{ width: '90vw', height: '80vh' }}>
+                <div className='pagination'>
+                    <Pagination
+                        defaultCurrent={pagination.current_page}
+                        total={pagination.total_pages}
+                        onChange={changePage}
+                        showSizeChanger={false}
+                        showQuickJumper
+                        showTotal={(total) => `Total ${total} items`}
+                    />
+                </div>
+                {item?.title && <Page item={item} />}
+            </Space>
         </div>
     );
 }

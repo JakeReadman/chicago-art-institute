@@ -10,7 +10,7 @@ const buildEndpoint = (endpoint, operation = null) => {
 
 export const getRequest = async ({ endpoint, params, onSuccess, onError }) => {
     try {
-        let res = await _axios.get(`https://api.artic.edu/api${endpoint}`, { params: params });
+        let res = await _axios.get(`https://api.artic.edu/${endpoint}`, { params: params });
         onSuccess(res);
     } catch (error) {
         onError(error);

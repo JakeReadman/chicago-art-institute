@@ -1,38 +1,70 @@
-.App {
-  text-align: center;
+body {
+    box-sizing: border-box;
+    font-family: Helvetica, sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.catalogue {
+    padding: 50px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.pagination {
+    display: flex;
+    justify-content: flex-end;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.pagination ul {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding: 20px;
 }
 
-.App-link {
-  color: #61dafb;
+.page {
+    margin: 100px auto;
+    padding: 50px;
+    height: 80vh;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+        rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.page-title {
+    text-align: center;
+    margin-bottom: 40px;
+    font-weight: 500;
+    letter-spacing: 0.1rem;
+}
+
+.page-content {
+    display: flex;
+}
+
+.page-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+    width: 80vw;
+    overflow: hidden;
+    margin: auto;
+}
+
+.page-image img {
+    height: 60vh;
+    width: 60vw;
+    object-fit: cover;
+    box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+}
+
+.page-text {
+    margin-left: 3%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.price p {
+    font-size: 3rem;
+}
+
+.description {
+    margin-top: 2%;
+    font-size: 1.2rem;
 }
