@@ -7,6 +7,7 @@ import Page from './Page';
 export default function Catalogue() {
     const [item, setItem] = useState({});
     const [pagination, setPagination] = useState(1);
+    const [image, setImage] = useState('');
 
     useEffect(() => {
         getRequest({
@@ -25,6 +26,7 @@ export default function Catalogue() {
     }, []);
 
     const changePage = (page) => {
+        setImage('');
         getRequest({
             endpoint: 'api/v1/products',
             params: {
@@ -32,6 +34,7 @@ export default function Catalogue() {
                 page: page,
             },
             onSuccess: (response) => {
+                console.log(response);
                 setItem(response.data.data[0]);
                 setPagination(response.data.pagination);
             },
@@ -40,6 +43,25 @@ export default function Catalogue() {
             },
         });
     };
+
+    useEffect(() => {
+        if (!item?.id) {
+            return;
+        }
+        getRequest({
+            endpoint: `api/v1/artworks/${item.id}`,
+            params: {
+                fields: 'id,title,image_id',
+            },
+            onSuccess: (response) => {
+                setImage(`https://www.artic.edu/iiif/2/${response.data.data.image_id}/full/843,/0/default.jpg`);
+            },
+            onError: (error) => {
+                console.warn(error);
+                setImage(item.image_url);
+            },
+        });
+    }, [item]);
 
     return (
         <div className='catalogue'>
@@ -52,9 +74,10 @@ export default function Catalogue() {
                         showSizeChanger={false}
                         showQuickJumper
                         showTotal={(total) => `Total ${total} items`}
+                        responsive={false}
                     />
                 </div>
-                {item?.title && <Page item={item} />}
+                {item?.title && <Page item={item} image={image} />}
             </Space>
         </div>
     );
